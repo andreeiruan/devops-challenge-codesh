@@ -35,7 +35,14 @@ jobs:
 
       - name: Deploy using CodeDeploy
         run: |
-          aws deploy create-deployment \
-            --application-name devops-challenge-nginx-web-app \
-            --deployment-group-name devops-challenge-nginx-web-dg \
-            --s3-location bucket=${{ secrets.S3_BUCKET }},key=${{ github.sha }}.zip,bundleType=zip
+          DEPLOYMENT_ID=$(aws deploy create-deployment \
+                --application-name devops-challenge-nginx-web-app \
+                --deployment-group-name devops-challenge-nginx-web-dg \
+                --s3-location bucket=${{ secrets.S3_BUCKET }},key=${{ github.sha }}.zip,bundleType=zip \
+                --query "deploymentId" --output text)
+              echo "Deployment ID: $DEPLOYMENT_ID"
+
+          aws deploy wait deployment-successful --deployment-id $DEPLOYMENT_ID
+
+          FINAL_STATUS=$(aws deploy get-deployment --deployment-id $DEPLOYMENT_ID --query "deploymentInfo.status" --output text)
+          echo "Deployment finished with status: $FINAL_STATUS"
