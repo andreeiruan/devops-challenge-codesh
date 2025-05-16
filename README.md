@@ -96,7 +96,7 @@ tofu apply
 5. Configure as secrets no GitHub:
    - AWS_ACCESS_KEY_ID
    - AWS_SECRET_ACCESS_KEY
-   - S3_BUCKET
+   - S3_BUCKET (após o apply o terraform terá um output que será o nome do bucket que deverá ser configurado).
 
 ### 📁 O que Tem no Projeto
 ```
