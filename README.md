@@ -1,65 +1,97 @@
-# Infra Challenge 20240202
+# 🚀 DevOps Challenge - Infraestrutura como Código e CI/CD
 
-## Introdução
+## 📝 Sobre o Projeto
+Este projeto demonstra como automatizar a infraestrutura na nuvem e implementar entrega contínua. Usamos Terraform para criar a infraestrutura e GitHub Actions para automatizar o deploy.
 
-Este é um teste para que possamos ver as suas habilidades como DevOps.
+## 🛠️ Tecnologias e Seus Papéis
 
-Nesse teste você deverá configurar um servidor, aplicar os principais recursos de segurança e trabalhar com Infra as Code
+### 🌐 Infraestrutura
+- Terraform: Cria e gerencia toda a infraestrutura como código
+- Opentofu: Versão open-source do Terraform
+- AWS: Fornece servidores (EC2), armazenamento (S3) e serviços de deploy
+- Ubuntu 22.04: Sistema operacional estável e seguro
+- Nginx: Servidor web rápido e confiável
 
-[SPOILER] As instruções de entrega e apresentação do challenge estão no final deste Readme (=
+### 🔄 CI/CD
+- GitHub Actions: Automatiza o processo de deploy
+- AWS CodeDeploy: Gerencia o deploy nos servidores
+- AWS S3: Armazena os arquivos de deploy
 
-### Antes de começar
- 
-- Considere como deadline da avaliação a partir do início do teste. Caso tenha sido convidado a realizar o teste e não seja possível concluir dentro deste período, avise a pessoa que o convidou para receber instruções sobre o que fazer.
-- Documentar todo o processo de investigação para o desenvolvimento da atividade (README.md no seu repositório); os resultados destas tarefas são tão importantes do que o seu processo de pensamento e decisões à medida que as completa, por isso tente documentar e apresentar os seus hipóteses e decisões na medida do possível.
+### 🔒 Segurança
+- AWS Security Groups: Controla acesso à rede
+- UFW: Firewall simples e eficiente
+- Fail2ban: Bloqueia tentativas de invasão
+- AWS SSM Agent: Gerencia servidores remotamente
 
+## 📋 Como Usar
 
-## **Parte 1 - Configuração do Servidor**
+### ⚙️ O que Você Precisa
+- Conta AWS
+- Terraform/Opentofu
+- GitHub
+- AWS CLI
 
-A sua tarefa consiste em configurar um servidor baseado na nuvem e instalar e configurar alguns componentes básicos.
+### 🔧 Passo a Passo
 
+1. Clone o projeto:
+```bash
+git clone https://github.com/andreeiruan/devops-challenge-codesh.git
+cd devops-challenge-codesh
+```
 
-1. Configurar grupo de segurança na AWS
-2. Configuração da redes para o Servidor
-3. Configurar um servidor AWS (recomenda-se o freetier) executando uma versão Ubuntu LTS.
-4. Instalar e configurar qualquer software que você recomendaria em uma configuração de servidor padrão sob as perspectivas de segurança, desempenho, backup e monitorização.
-5. Instalar e configurar o nginx para servir uma página web HTML estática.
+2. Configure AWS:
+```bash
+aws configure
+```
 
+3. Inicie o Terraform:
+```bash
+cd .infra
+tofu init
+```
 
+4. Crie a infraestrutura:
+```bash
+tofu apply
+```
 
-## **Part 2 – Infra as Code**
+5. Configure as secrets no GitHub:
+   - AWS_ACCESS_KEY_ID
+   - AWS_SECRET_ACCESS_KEY
+   - S3_BUCKET
 
-Como diferencial, você poderá configurar toda a infra-estrutura com ferramentas como:
+### 📁 O que Tem no Projeto
+```
+.
+├── .github/          # Configurações do GitHub
+├── .infra/          # Código da infraestrutura
+├── scripts/         # Scripts de automação
+└── web/            # Arquivos da aplicação
+```
 
-- Ansible
-- Terraform
-- AWS CDK ou CloudFormation
+### 🚀 Deploy
+1. Push para `main`
+2. GitHub Actions faz o resto:
+   - Empacota a aplicação
+   - Envia para AWS
+   - Faz o deploy
+3. Pronto! Acesse o site (após o apply o terraform terá um output que será o IP para acessar).
 
-Ao ter o projeto executando em um servidor e aplicando as melhores práticas de segurança com grupos de segurança e as configurações de rede criando completamente por código.
+## 🔒 Segurança
+- Firewall ativo (UFW e Security groups)
+- Proteção contra ataques
+- Permissões restritas
+- Secrets protegidos
 
+## 📊 Monitoramento
+- Métricas em tempo real com cloudwatch.
 
-## **Part 3 – Continuous Delivery**
+## Limpeza
+Para limpar a infra apenas rode: 
+```bash
+tofu destroy
+```
 
-Desenhar e construir uma pipeline para apoiar a entrega contínua da aplicação de monitorização construída na Parte 2 no servidor configurado na Parte 1. Descrever a pipeline utilizando um diagrama de fluxo e explicar o objetivo e o processo de seleção usado em cada uma das ferramentas e técnicas específicas que compõem a sua pipeline. 
+---
 
-## Readme do Repositório
-
-- Deve conter o título do projeto
-- Uma descrição sobre o projeto em frase
-- Deve conter uma lista com linguagem, framework e/ou tecnologias usadas
-- Como instalar e usar o projeto (instruções)
-- Não esqueça o [.gitignore](https://www.toptal.com/developers/gitignore)
-- Se está usando github pessoal, referencie que é um challenge by coodesh:  
-
->  This is a challenge by [Coodesh](https://coodesh.com/)
-
-## Finalização e Instruções para a Apresentação
-
-1. Adicione o link do repositório com a sua solução no teste
-2. Verifique se o Readme está bom e faça o commit final em seu repositório;
-3. Envie e aguarde as instruções para seguir. Caso o teste tenha apresentação de vídeo, dentro da tela de entrega será possível gravar após adicionar o link do repositório. Sucesso e boa sorte. =)
-
-
-## Suporte
-
-Para tirar dúvidas sobre o processo envie uma mensagem diretamente a um especialista no chat da plataforma. 
+This is a challenge by [Coodesh](https://coodesh.com/)
