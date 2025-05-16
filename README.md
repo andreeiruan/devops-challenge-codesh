@@ -3,6 +3,44 @@
 ## 📝 Sobre o Projeto
 Este projeto demonstra como automatizar a infraestrutura na nuvem e implementar entrega contínua. Usamos Terraform para criar a infraestrutura e GitHub Actions para automatizar o deploy.
 
+## 💭 Processo de Desenvolvimento
+
+### Decisões Técnicas
+1. **Infraestrutura como Código**
+   - Escolhi Terraform/Opentofu por ser ferramentas que estou mais acostumado no dia a dia.
+   - Separei os recursos em arquivos por tipo (ec2.tf, vpc.tf, etc.) para melhor organização, utilizei a doc do Terraform como fonte de busca para criação dos recursos.
+   - Usei locals para manter consistência nos nomes dos recursos
+
+2. **Segurança**
+   - Implementei UFW e Security Groups para dupla camada de proteção
+   - Fail2ban para proteção contra ataques de força bruta
+   - Permissões IAM mínimas seguindo o princípio do menor privilégio
+
+3. **CI/CD**
+   - GitHub Actions para integração com o repositório
+   - CodeDeploy para gerenciar deploys de forma confiável
+   - S3 para versionamento dos artefatos
+
+4. **Monitoramento**
+   - CloudWatch Agent para métricas e logs
+   - Configuração básica para começar, com possibilidade de expansão
+
+5. **Documentação**
+   - Utilização de IA para ajudar a ter uma documentação mais estruturada e clara.
+
+### Desafios e Soluções
+1. **Configuração do CodeDeploy**
+   - Desafio: Garantir que o agente do CodeDeploy estivesse funcionando
+   - Solução: Adicionei o script de instalação no user_data da EC2
+
+2. **Segurança da EC2**
+   - Desafio: Balancear segurança e usabilidade
+   - Solução: Implementei múltiplas camadas de proteção (UFW + Security Groups)
+
+3. **Pipeline de Deploy**
+   - Desafio: Garantir deploy consistente
+   - Solução: Uso do appspec.yml para definir o processo de deploy
+
 ## 🛠️ Tecnologias e Seus Papéis
 
 ### 🌐 Infraestrutura
