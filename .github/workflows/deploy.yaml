@@ -36,6 +36,6 @@ jobs:
       - name: Deploy using CodeDeploy
         run: |
           aws deploy create-deployment \
-            --application-name devops-challenge-nginx-web-dg \
+            --application-name devops-challenge-nginx-web-app \
             --deployment-group-name devops-challenge-nginx-web-dg \
             --s3-location bucket=${{ secrets.S3_BUCKET }},key=${{ github.sha }}.zip,bundleType=zip
